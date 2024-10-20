@@ -5,7 +5,7 @@ import { addItem } from "./CartSlice";
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-    const [addedToCart, setAddedToCart] = useState({});// I added
+    const [addedToCart, setAddedToCart] = useState([]);// I added from task 1
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -234,11 +234,14 @@ function ProductList() {
     textDecoration: 'none',
    }
 
-   const handleAddToCart = (product) => {
-    dispatch(addItem(product));
-    setAddedToCart((prevState) => ({
+
+
+   const handleAddToCart = (plant) => {
+    //alert(`${plant.name} added to cart!`);
+    dispatch(addItem(plant));
+   setAddedToCart((prevState) => ({
        ...prevState,
-       [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
+       [plant.name]: true, // Set the product name as key and value as true to indicate it's added to cart
      }));
   };
    const handleCartClick = (e) => {
@@ -286,6 +289,8 @@ const handlePlantsClick = (e) => {
             <div className="product-card" key={plantIndex}>
                 <img className="product-image" src={plant.image} alt={plant.name} />
                 <div className="product-title">{plant.name}</div>
+                {/*<div className="product-description">{plant.description}</div>*/}
+                <div className="product-cost">{plant.cost}</div>
                 {/*Similarly like the above plant.name show other details like description and cost*/}
                 <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
             </div>
